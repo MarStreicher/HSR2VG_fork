@@ -26,4 +26,4 @@ export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
 export WANDB_AGENT_MAX_INITIAL_FAILURES=1000
-wandb agent marleen-streicher/hsr/60li165w
+wandb agent user/hsr/60li165w

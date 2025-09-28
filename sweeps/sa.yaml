@@ -1,7 +1,7 @@
 program: src/train.py
 method: bayes
 name: sa-camelina-maize
-entity: marleen-streicher
+entity: user
 project: hsr
 run_cap: 100
 command:
