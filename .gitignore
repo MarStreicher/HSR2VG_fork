@@ -1,0 +1,6 @@
+data
+slurm_out
+wandb
+.env
+.vscode
+

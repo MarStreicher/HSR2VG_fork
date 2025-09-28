@@ -1,0 +1,24 @@
+program: src/train.py
+method: bayes
+name: sa-camelina-maize
+entity: marleen-streicher
+project: hsr
+run_cap: 100
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+  - --use_wandb
+  - --model=SA
+  - --source_domain=camelina
+  - --target_domain=maize
+  - --sweep
+metric:
+  name: source_r
+  goal: maximize
+parameters:
+  n_components:
+    values: [2, 10, 20, 30, 40, 50, 60, 70, 80, 85, 90, 100, 200, 300, 500]
+  sa_n_component:
+    values: [2, 10, 20, 30, 40, 50, 60, 70, 80, 85, 90, 100, 200, 300, 500]
