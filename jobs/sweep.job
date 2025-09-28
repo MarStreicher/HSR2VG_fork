@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+#SBATCH --partition=all              # Partition name
+#SBATCH --nodes=1                    # Number of nodes
+#SBATCH --ntasks=1                   # Number of tasks
+#SBATCH --cpus-per-task=1            # Number of CPU cores
+#SBATCH --mem=2G                    # Memory allocation
+#SBATCH --time=0-1:00:00            # Max runtime (hh:mm:ss)
+#SBATCH --output=slurm_out/slurm-%j.out        # Output log file (stdout + stderr)
+#SBATCH --mail-type=END              # Send an email when the job finishes
+
+# Load modules and activate Conda environment
+cd /work/user/hsr_unsupervised_models
+module load lang/Anaconda3/2024.02-1
+eval "$(conda shell.zsh hook)"
+conda activate env_hsr_adaptation
+
+# Set up the proxy for internet access on the compute node
+export http_proxy=http://proxy2.uni-potsdam.de:3128
+export https_proxy=http://proxy2.uni-potsdam.de:3128
+export ftp_proxy=http://proxy2.uni-potsdam.de:3128
+
+# Ensure WandB uses the proxy
+export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
+export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
+export WANDB_MODE=offline 
+
+export WANDB_AGENT_MAX_INITIAL_FAILURES=1000
+wandb agent marleen-streicher/hsr/60li165w

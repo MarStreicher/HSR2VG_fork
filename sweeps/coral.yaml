@@ -1,0 +1,24 @@
+program: src/train.py
+method: bayes
+name: coral-maize-sorghum
+entity: marleen-streicher
+project: hsr
+run_cap: 100
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+  - --use_wandb
+  - --model=CORAL
+  - --source_domain=maize
+  - --target_domain=sorghum
+  - --sweep
+metric:
+  name: source_r
+  goal: maximize
+parameters:
+  n_components:
+    values: [2, 10, 20, 30, 40, 50, 60, 70, 80, 85, 90, 100, 200, 300, 500]
+  lambda_value:
+    values: [0.1, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0]

@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+#SBATCH --partition=all              # Partition name
+#SBATCH --nodes=1                    # Number of nodes
+#SBATCH --ntasks=1                   # Number of tasks
+#SBATCH --cpus-per-task=1            # Number of CPU cores
+#SBATCH --mem=2G                    # Memory allocation
+#SBATCH --time=0-6:00:00            # Max runtime (hh:mm:ss)
+#SBATCH --output=slurm_out/train-%j.out        # Output log file (stdout + stderr)
+#SBATCH --mail-type=END              # Send an email when the job finishes
+
+# Load modules and activate Conda environment
+cd /work/user/hsr_unsupervised_models
+module load lang/Anaconda3/2024.02-1
+eval "$(conda shell.zsh hook)"
+conda activate env_hsr_adaptation
+
+# Set up the proxy for internet access on the compute node
+export http_proxy=http://proxy2.uni-potsdam.de:3128
+export https_proxy=http://proxy2.uni-potsdam.de:3128
+export ftp_proxy=http://proxy2.uni-potsdam.de:3128
+
+# Ensure WandB uses the proxy
+export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
+export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
+export WANDB_MODE=offline 
+
+python src/train.py --model=TCA --source_domain=soybean --target_domain=camelina --use_wandb --n_components=20 --mu=2 --kernel=linear
+python src/train.py --model=TCA --source_domain=soybean --target_domain=sorghum --use_wandb --n_components=10 --mu=0.0001 --kernel=linear
+python src/train.py --model=TCA --source_domain=soybean --target_domain=maize --use_wandb --n_components=20 --mu=0.1 --kernel=linear
+
+python src/train.py --model=TCA --source_domain=camelina --target_domain=soybean --use_wandb --n_components=10 --mu=0.0001 --kernel=linear
+python src/train.py --model=TCA --source_domain=camelina --target_domain=sorghum --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+python src/train.py --model=TCA --source_domain=camelina --target_domain=maize --use_wandb --n_components=20 --mu=2 --kernel=linear
+
+python src/train.py --model=TCA --source_domain=sorghum --target_domain=soybean --use_wandb --n_components=20 --mu=2 --kernel=linear
+python src/train.py --model=TCA --source_domain=sorghum --target_domain=camelina --use_wandb --n_components=20 --mu=0.0001 --kernel=linear
+python src/train.py --model=TCA --source_domain=sorghum --target_domain=maize --use_wandb --n_components=20 --mu=1 --kernel=linear
+
+python src/train.py --model=TCA --source_domain=maize --target_domain=soybean --use_wandb --n_components=10 --mu=1 --kernel=rbf
+python src/train.py --model=TCA --source_domain=maize --target_domain=camelina --use_wandb --n_components=2 --mu=2 --kernel=linear
+python src/train.py --model=TCA --source_domain=maize --target_domain=sorghum --use_wandb --n_components=10 --mu=0.001 --kernel=linear
