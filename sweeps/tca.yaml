@@ -1,6 +1,6 @@
 program: src/train.py
 method: bayes
-name: tca-camelina-soybean
+name: tca-soybean-sorghum
 entity: user
 project: hsr
 run_cap: 100
@@ -11,8 +11,9 @@ command:
   - ${args}
   - --use_wandb
   - --model=TCA
-  - --source_domain=camelina
-  - --target_domain=soybean
+  - --label=LMA
+  - --source_domain=soybean
+  - --target_domain=sorghum
   - --sweep
 metric:
   name: source_r

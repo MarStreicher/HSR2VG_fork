@@ -1,6 +1,6 @@
 program: src/train.py
 method: bayes
-name: sa-camelina-maize
+name: sa-maize-soybean
 entity: user
 project: hsr
 run_cap: 100
@@ -11,8 +11,9 @@ command:
   - ${args}
   - --use_wandb
   - --model=SA
-  - --source_domain=camelina
-  - --target_domain=maize
+  - --label=LMA
+  - --source_domain=maize
+  - --target_domain=soybean
   - --sweep
 metric:
   name: source_r

@@ -3,7 +3,7 @@ name = "hsr_unsupervised_models"
 version = "0.1.0"
 description = "Unsupervised models for HSR"
 authors = [
-  { name = "Marleen Streicher", email = "mstreicher@uni-potsdam.de" }
+  { name = "Marleen Streicher", email = "user@uni-potsdam.de" }
 ]
 readme = "README.md"
 requires-python = ">=3.8"

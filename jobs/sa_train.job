@@ -25,18 +25,31 @@ export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
-python src/train.py --model=SA --source_domain=soybean --target_domain=camelina --use_wandb --n_components=50 --sa_n_component=60
-python src/train.py --model=SA --source_domain=soybean --target_domain=sorghum --use_wandb --n_components=10 --sa_n_component=80
-python src/train.py --model=SA --source_domain=soybean --target_domain=maize --use_wandb --n_components=100 --sa_n_component=100
+# python src/train.py --model=SA --source_domain=soybean --target_domain=camelina --label=N --use_wandb --n_components=50 --sa_n_component=60
+# python src/train.py --model=SA --source_domain=soybean --target_domain=sorghum --label=N --use_wandb --n_components=50 --sa_n_component=60
+# python src/train.py --model=SA --source_domain=soybean --target_domain=maize --label=N --use_wandb --n_components=50 --sa_n_component=60
 
-python src/train.py --model=SA --source_domain=camelina --target_domain=soybean --use_wandb --n_components=40 --sa_n_component=70
-python src/train.py --model=SA --source_domain=camelina --target_domain=sorghum --use_wandb --n_components=50 --sa_n_component=60
-python src/train.py --model=SA --source_domain=camelina --target_domain=maize --use_wandb --n_components=40 --sa_n_component=40
+# python src/train.py --model=SA --source_domain=camelina --target_domain=soybean --label=N --use_wandb --n_components=40 --sa_n_component=70
+# python src/train.py --model=SA --source_domain=camelina --target_domain=sorghum --label=N --use_wandb --n_components=40 --sa_n_component=70
+# python src/train.py --model=SA --source_domain=camelina --target_domain=maize --label=N --use_wandb --n_components=40 --sa_n_component=70
 
-python src/train.py --model=SA --source_domain=sorghum --target_domain=soybean --use_wandb --n_components=60 --sa_n_component=100
-python src/train.py --model=SA --source_domain=sorghum --target_domain=camelina --use_wandb --n_components=85 --sa_n_component=85
-python src/train.py --model=SA --source_domain=sorghum --target_domain=maize --use_wandb --n_components=10 --sa_n_component=300
+# python src/train.py --model=SA --source_domain=sorghum --target_domain=soybean --label=N --use_wandb --n_components=60 --sa_n_component=90
+# python src/train.py --model=SA --source_domain=sorghum --target_domain=camelina --label=N --use_wandb --n_components=60 --sa_n_component=90
+# python src/train.py --model=SA --source_domain=sorghum --target_domain=maize --label=N --use_wandb --n_components=60 --sa_n_component=90
 
-python src/train.py --model=SA --source_domain=maize --target_domain=soybean --use_wandb --n_components=60 --sa_n_component=100
-python src/train.py --model=SA --source_domain=maize --target_domain=camelina --use_wandb --n_components=50 --sa_n_component=90
-python src/train.py --model=SA --source_domain=maize --target_domain=sorghum --use_wandb --n_components=80 --sa_n_component=300
+# python src/train.py --model=SA --source_domain=maize --target_domain=soybean --label=N --use_wandb --n_components=60 --sa_n_component=90
+# python src/train.py --model=SA --source_domain=maize --target_domain=camelina --label=N --use_wandb --n_components=60 --sa_n_component=90
+# python src/train.py --model=SA --source_domain=maize --target_domain=sorghum --label=N --use_wandb --n_components=60 --sa_n_component=90
+
+
+
+
+
+# python src/train.py --model=SA --source_domain=soybean --target_domain=sorghum --label=LMA --use_wandb --n_components=30 --sa_n_component=50
+# python src/train.py --model=SA --source_domain=soybean --target_domain=maize --label=LMA --use_wandb --n_components=30 --sa_n_component=50
+
+python src/train.py --model=SA --source_domain=sorghum --target_domain=soybean --label=LMA --use_wandb --n_components=20 --sa_n_component=100
+python src/train.py --model=SA --source_domain=sorghum --target_domain=maize --label=LMA --use_wandb --n_components=20 --sa_n_component=100
+
+# python src/train.py --model=SA --source_domain=maize --target_domain=soybean --label=LMA --use_wandb --n_components=70 --sa_n_component=100
+# python src/train.py --model=SA --source_domain=maize --target_domain=sorghum --label=LMA --use_wandb --n_components=70 --sa_n_component=100

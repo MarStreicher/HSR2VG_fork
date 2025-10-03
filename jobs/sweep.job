@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=1            # Number of CPU cores
 #SBATCH --mem=2G                    # Memory allocation
 #SBATCH --time=0-1:00:00            # Max runtime (hh:mm:ss)
-#SBATCH --output=slurm_out/slurm-%j.out        # Output log file (stdout + stderr)
+#SBATCH --output=slurm_out/sweep-%j.out        # Output log file (stdout + stderr)
 #SBATCH --mail-type=END              # Send an email when the job finishes
 
 # Load modules and activate Conda environment
@@ -26,4 +26,4 @@ export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
 export WANDB_AGENT_MAX_INITIAL_FAILURES=1000
-wandb agent user/hsr/60li165w
+WANDB_AGENT_MAX_INITIAL_FAILURES=1000 wandb agent user/hsr/ab6dil9h
