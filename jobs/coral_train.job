@@ -25,18 +25,33 @@ export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
-python src/train.py --model=CORAL --source_domain=soybean --target_domain=camelina --use_wandb --n_components=20 --lambda_value=0.1
-python src/train.py --model=CORAL --source_domain=soybean --target_domain=sorghum --use_wandb --n_components=20 --lambda_value=3
-python src/train.py --model=CORAL --source_domain=soybean --target_domain=maize --use_wandb --n_components=10 --lambda_value=2
+# python src/train.py --model=CORAL --source_domain=soybean --target_domain=camelina --label=N --use_wandb --n_components=20 --lambda_value=0.1
+# python src/train.py --model=CORAL --source_domain=soybean --target_domain=sorghum --label=N --use_wandb --n_components=20 --lambda_value=0.1
+# python src/train.py --model=CORAL --source_domain=soybean --target_domain=maize --label=N --use_wandb --n_components=20 --lambda_value=0.1
 
-python src/train.py --model=CORAL --source_domain=camelina --target_domain=soybean --use_wandb --n_components=40 --lambda_value=4
-python src/train.py --model=CORAL --source_domain=camelina --target_domain=sorghum --use_wandb --n_components=10 --lambda_value=0.1
-python src/train.py --model=CORAL --source_domain=camelina --target_domain=maize --use_wandb --n_components=30 --lambda_value=4
+# python src/train.py --model=CORAL --source_domain=camelina --target_domain=soybean --label=N --use_wandb --n_components=40 --lambda_value=4
+# python src/train.py --model=CORAL --source_domain=camelina --target_domain=sorghum --label=N --use_wandb --n_components=40 --lambda_value=4
+# python src/train.py --model=CORAL --source_domain=camelina --target_domain=maize --label=N --use_wandb --n_components=40 --lambda_value=4
 
-python src/train.py --model=CORAL --source_domain=sorghum --target_domain=soybean --use_wandb --n_components=40 --lambda_value=1
-python src/train.py --model=CORAL --source_domain=sorghum --target_domain=camelina --use_wandb --n_components=50 --lambda_value=4
-python src/train.py --model=CORAL --source_domain=sorghum --target_domain=maize --use_wandb --n_components=30 --lambda_value=5
+# python src/train.py --model=CORAL --source_domain=sorghum --target_domain=soybean --label=N --use_wandb --n_components=40 --lambda_value=1
+# python src/train.py --model=CORAL --source_domain=sorghum --target_domain=camelina --label=N --use_wandb --n_components=40 --lambda_value=1
+# python src/train.py --model=CORAL --source_domain=sorghum --target_domain=maize --label=N --use_wandb --n_components=40 --lambda_value=1
 
-python src/train.py --model=CORAL --source_domain=maize --target_domain=soybean --use_wandb --n_components=70 --lambda_value=0.1
-python src/train.py --model=CORAL --source_domain=maize --target_domain=camelina --use_wandb --n_components=60 --lambda_value=2
-python src/train.py --model=CORAL --source_domain=maize --target_domain=sorghum --use_wandb --n_components=50 --lambda_value=0.1
+# python src/train.py --model=CORAL --source_domain=maize --target_domain=soybean --label=N --use_wandb --n_components=70 --lambda_value=0.1
+# python src/train.py --model=CORAL --source_domain=maize --target_domain=camelina --label=N --use_wandb --n_components=70 --lambda_value=0.1
+# python src/train.py --model=CORAL --source_domain=maize --target_domain=sorghum --label=N --use_wandb --n_components=70 --lambda_value=0.1
+
+
+
+
+
+
+
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=sorghum --label=LMA --use_wandb --n_components=10 --lambda_value=6
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=maize --label=LMA --use_wandb --n_components=10 --lambda_value=6
+
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=soybean --label=LMA --use_wandb --n_components=70 --lambda_value=4
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=maize --label=LMA --use_wandb --n_components=70 --lambda_value=4
+
+python src/train.py --model=CORAL --source_domain=maize --target_domain=soybean --label=LMA --use_wandb --n_components=50 --lambda_value=0.1
+python src/train.py --model=CORAL --source_domain=maize --target_domain=sorghum --label=LMA --use_wandb --n_components=50 --lambda_value=0.1

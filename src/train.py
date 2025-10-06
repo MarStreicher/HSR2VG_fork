@@ -3,7 +3,9 @@ import wandb
 from random import randint
 from sklearn.model_selection import KFold
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler
+import warnings
 
 import argparsing
 from hsr_data import HsrData
@@ -12,8 +14,27 @@ ENV_PATH = ".env"
 
 model_cls, config = argparsing.get_model_and_config()
 
-source_data = HsrData(config.source_domain)
-target_data = HsrData(config.target_domain)
+source_data = HsrData(config.source_domain, config.label)
+target_data = HsrData(config.target_domain, config.label)
+
+source_na_samples = []
+target_na_samples = []
+
+if source_data.labels.isna().any():
+    source_na_samples = source_data.labels[source_data.labels.isna()].index.to_list()
+    warnings.warn(
+        f"NA values in source data: {len(source_na_samples)}, Samples were removed."
+    )
+    source_data.feature_matrix = source_data.feature_matrix.drop(source_na_samples)
+    source_data.labels = source_data.labels.drop(source_na_samples)
+
+if target_data.labels.isna().any():
+    target_na_samples = target_data.labels[target_data.labels.isna()].index.to_list()
+    warnings.warn(
+        f"NA values in target data: {len(target_na_samples)}, Samples were removed."
+    )
+    target_data.feature_matrix = target_data.feature_matrix.drop(target_na_samples)
+    target_data.labels = target_data.labels.drop(target_na_samples)
 
 seeds = [i for i in range(0, 100, 10)]
 if config.sweep:

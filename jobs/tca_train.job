@@ -25,18 +25,33 @@ export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
-python src/train.py --model=TCA --source_domain=soybean --target_domain=camelina --use_wandb --n_components=20 --mu=2 --kernel=linear
-python src/train.py --model=TCA --source_domain=soybean --target_domain=sorghum --use_wandb --n_components=10 --mu=0.0001 --kernel=linear
-python src/train.py --model=TCA --source_domain=soybean --target_domain=maize --use_wandb --n_components=20 --mu=0.1 --kernel=linear
+# python src/train.py --model=TCA --source_domain=soybean --target_domain=camelina --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
+# python src/train.py --model=TCA --source_domain=soybean --target_domain=sorghum --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
+# python src/train.py --model=TCA --source_domain=soybean --target_domain=maize --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
 
-python src/train.py --model=TCA --source_domain=camelina --target_domain=soybean --use_wandb --n_components=10 --mu=0.0001 --kernel=linear
-python src/train.py --model=TCA --source_domain=camelina --target_domain=sorghum --use_wandb --n_components=20 --mu=0.001 --kernel=linear
-python src/train.py --model=TCA --source_domain=camelina --target_domain=maize --use_wandb --n_components=20 --mu=2 --kernel=linear
+# python src/train.py --model=TCA --source_domain=camelina --target_domain=soybean --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+# python src/train.py --model=TCA --source_domain=camelina --target_domain=sorghum --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+# python src/train.py --model=TCA --source_domain=camelina --target_domain=maize --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
 
-python src/train.py --model=TCA --source_domain=sorghum --target_domain=soybean --use_wandb --n_components=20 --mu=2 --kernel=linear
-python src/train.py --model=TCA --source_domain=sorghum --target_domain=camelina --use_wandb --n_components=20 --mu=0.0001 --kernel=linear
-python src/train.py --model=TCA --source_domain=sorghum --target_domain=maize --use_wandb --n_components=20 --mu=1 --kernel=linear
+# python src/train.py --model=TCA --source_domain=sorghum --target_domain=soybean --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
+# python src/train.py --model=TCA --source_domain=sorghum --target_domain=camelina --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
+# python src/train.py --model=TCA --source_domain=sorghum --target_domain=maize --label=N --use_wandb --n_components=20 --mu=2 --kernel=linear
 
-python src/train.py --model=TCA --source_domain=maize --target_domain=soybean --use_wandb --n_components=10 --mu=1 --kernel=rbf
-python src/train.py --model=TCA --source_domain=maize --target_domain=camelina --use_wandb --n_components=2 --mu=2 --kernel=linear
-python src/train.py --model=TCA --source_domain=maize --target_domain=sorghum --use_wandb --n_components=10 --mu=0.001 --kernel=linear
+# python src/train.py --model=TCA --source_domain=maize --target_domain=soybean --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+# python src/train.py --model=TCA --source_domain=maize --target_domain=camelina --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+# python src/train.py --model=TCA --source_domain=maize --target_domain=sorghum --label=N --use_wandb --n_components=20 --mu=0.001 --kernel=linear
+
+
+
+
+
+
+
+python src/train.py --model=TCA --source_domain=soybean --target_domain=sorghum --label=LMA --use_wandb --n_components=10 --mu=0.1 --kernel=rbf
+python src/train.py --model=TCA --source_domain=soybean --target_domain=maize --label=LMA --use_wandb --n_components=10 --mu=0.1 --kernel=rbf
+
+python src/train.py --model=TCA --source_domain=sorghum --target_domain=soybean --label=LMA --use_wandb --n_components=20 --mu=2 --kernel=rbf
+python src/train.py --model=TCA --source_domain=sorghum --target_domain=maize --label=LMA --use_wandb --n_components=20 --mu=2 --kernel=rbf
+
+python src/train.py --model=TCA --source_domain=maize --target_domain=soybean --label=LMA --use_wandb --n_components=2 --mu=1 --kernel=linear
+python src/train.py --model=TCA --source_domain=maize --target_domain=sorghum --label=LMA --use_wandb --n_components=2 --mu=1 --kernel=linear

@@ -1,6 +1,6 @@
 program: src/train.py
 method: bayes
-name: coral-maize-sorghum
+name: coral-maize-soybean
 entity: user
 project: hsr
 run_cap: 100
@@ -11,8 +11,9 @@ command:
   - ${args}
   - --use_wandb
   - --model=CORAL
+  - --label=LMA
   - --source_domain=maize
-  - --target_domain=sorghum
+  - --target_domain=soybean
   - --sweep
 metric:
   name: source_r
