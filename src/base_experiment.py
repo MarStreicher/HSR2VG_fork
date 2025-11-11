@@ -7,4 +7,5 @@ class BaseExperimentArgs(BaseModel):
     source_domain: str
     label: str
     use_wandb: bool = False
+    use_csv: bool = False
     sweep: bool = False

@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import warnings
+import os
 
 import argparsing
 from hsr_data import HsrData
@@ -75,6 +76,7 @@ try:
             ).ravel()
 
             model = model_cls(config)
+            model.seed = seed
             model.train(
                 Xs_train_scaled,
                 ys_train_scaled,
@@ -92,6 +94,45 @@ try:
             source_r2_values.append(source_r2)
             target_r_values.append(target_r)
             target_r2_values.append(target_r2)
+
+    if config.use_csv:
+        results_path = "results/results.csv"
+        if os.path.exists(results_path):
+            results_df = pd.read_csv(results_path, sep=";")
+        else:
+            results_df = pd.DataFrame(
+                columns=[
+                    "label",
+                    "source",
+                    "target",
+                    "model",
+                    "source_r2",
+                    "source_r2_sd",
+                    "source_r",
+                    "source_r_sd",
+                    "target_r2",
+                    "target_r2_sd",
+                    "target_r",
+                    "target_r_sd",
+                ]
+            )
+
+        new_row = {
+            "label": config.label,
+            "source": config.source_domain,
+            "target": config.target_domain,
+            "model": config.model,
+            "source_r2": np.mean(source_r2_values),
+            "source_r2_sd": np.std(source_r2_values),
+            "source_r": np.mean(source_r_values),
+            "source_r_sd": np.std(source_r_values),
+            "target_r2": np.mean(target_r2_values),
+            "target_r2_sd": np.std(target_r2_values),
+            "target_r": np.mean(target_r_values),
+            "target_r_sd": np.std(target_r_values),
+        }
+        results_df = pd.concat([results_df, pd.DataFrame([new_row])], ignore_index=True)
+        results_df.to_csv("results/results.csv", sep=";", index=False)
 
     if config.use_wandb:
         load_dotenv(ENV_PATH)
@@ -115,6 +156,7 @@ try:
             "target_r2": np.mean(target_r2_values),
             "target_r": np.mean(target_r_values),
         }
+
         wandb.log(logs)
         data = [
             ["source_r2", np.mean(source_r2_values), np.std(source_r2_values)],
