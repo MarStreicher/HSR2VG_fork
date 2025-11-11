@@ -10,7 +10,7 @@
 #SBATCH --mail-type=END              # Send an email when the job finishes
 
 # Load modules and activate Conda environment
-cd /work/marleen-streicher/hsr_unsupervised_models
+cd /work/user/hsr_unsupervised_models
 module load lang/Anaconda3/2024.02-1
 eval "$(conda shell.zsh hook)"
 conda activate env_hsr_adaptation
@@ -26,4 +26,4 @@ export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
 export WANDB_MODE=offline 
 
 export WANDB_AGENT_MAX_INITIAL_FAILURES=1000
-WANDB_AGENT_MAX_INITIAL_FAILURES=1000 wandb agent marleen-streicher/hsr/uehmkpvr
+WANDB_AGENT_MAX_INITIAL_FAILURES=1000 wandb agent user/hsr/uehmkpvr

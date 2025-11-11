@@ -143,7 +143,7 @@ try:
 
         run = wandb.init(
             project="hsr",
-            entity="marleen-streicher",
+            entity="user",
             config=config,
             name=run_name,
             save_code=True,

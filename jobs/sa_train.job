@@ -10,7 +10,7 @@
 #SBATCH --mail-type=END              # Send an email when the job finishes
 
 # Load modules and activate Conda environment
-cd /work/marleen-streicher/hsr_unsupervised_models
+cd /work/user/hsr_unsupervised_models
 module load lang/Anaconda3/2024.02-1
 eval "$(conda shell.zsh hook)"
 conda activate env_hsr_adaptation

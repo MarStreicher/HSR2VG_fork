@@ -384,4 +384,4 @@ dependencies:
       - typing-extensions==4.15.0
       - tyro==0.9.32
       - visualkeras==0.1.4
-prefix: /home/marleen-streicher/.conda/envs/env_hsr_adaptation
+prefix: /home/user/.conda/envs/env_hsr_adaptation
