@@ -1,9 +1,9 @@
 program: src/train.py
 method: bayes
-name: sa-maize-soybean
-entity: user
+name: N_sa-maize-camelina
+entity: marleen-streicher
 project: hsr
-run_cap: 100
+run_cap: 300
 command:
   - ${env}
   - ${interpreter}
@@ -11,15 +11,15 @@ command:
   - ${args}
   - --use_wandb
   - --model=SA
-  - --label=LMA
+  - --label=N
   - --source_domain=maize
-  - --target_domain=soybean
+  - --target_domain=camelina
   - --sweep
 metric:
   name: source_r
   goal: maximize
 parameters:
   n_components:
-    values: [2, 10, 20, 30, 40, 50, 60, 70, 80, 85, 90, 100, 200, 300, 500]
+    values: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75]
   sa_n_component:
-    values: [2, 10, 20, 30, 40, 50, 60, 70, 80, 85, 90, 100, 200, 300, 500]
+    values: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75]

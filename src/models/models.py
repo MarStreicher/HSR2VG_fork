@@ -10,12 +10,14 @@ class CORALModelArgs(BaseExperimentArgs):
     model: str = "CORAL"
     lambda_value: float = 0.01
     n_components: int = 2
+    seed: int = 42
 
 
 class CORALModel:
     def __init__(self, config: CORALModelArgs):
         self.lambda_value = config.lambda_value
         self.n_components = config.n_components
+        self.seed = config.seed
 
     def train(self, X_source, y_source, X_target):
         self.estimator = PLSRegression(self.n_components)
@@ -23,7 +25,7 @@ class CORALModel:
         self.model = CORAL(
             estimator=self.estimator,
             Xt=X_target,
-            random_state=42,
+            random_state=self.seed,
             lambda_=self.lambda_value,
             verbose=3,
             copy=False,
@@ -48,12 +50,14 @@ class SAModelArgs(BaseExperimentArgs):
     model: str = "SA"
     n_components: int = 2
     sa_n_component: int = 2
+    seed: int = 42
 
 
 class SAModel:
     def __init__(self, config: SAModelArgs):
         self.sa_n_component = config.sa_n_component
         self.n_components = config.n_components
+        self.seed = config.seed
 
     def train(self, X_source, y_source, X_target):
         self.estimator = PLSRegression(self.n_components)
@@ -61,7 +65,7 @@ class SAModel:
         self.model = SA(
             estimator=self.estimator,
             Xt=X_target,
-            random_state=42,
+            random_state=self.seed,
             n_components=self.sa_n_component,
             verbose=3,
             copy=False,
@@ -87,6 +91,7 @@ class TCAModelArgs(BaseExperimentArgs):
     n_components: int = 2
     mu: float = 2.0
     kernel: str = "linear"
+    seed: int = 42
 
 
 class TCAModel:
@@ -94,6 +99,7 @@ class TCAModel:
         self.mu = config.mu
         self.n_components = config.n_components
         self.kernel = config.kernel
+        self.seed = config.seed
 
     def train(self, X_source, y_source, X_target):
         self.estimator = PLSRegression(self.n_components)
@@ -101,7 +107,7 @@ class TCAModel:
         self.model = TCA(
             estimator=self.estimator,
             Xt=X_target,
-            random_state=42,
+            random_state=self.seed,
             mu=self.mu,
             kernel=self.kernel,
             verbose=3,
@@ -121,3 +127,30 @@ class TCAModel:
     @classmethod
     def get_args_model(cls):
         return TCAModelArgs
+
+class PLSRModelArgs(BaseExperimentArgs):
+    model: str = "PLSR"
+    n_components: int = 2
+    seed: int = 42
+
+
+class PLSRModel:
+    def __init__(self, config: PLSRModelArgs):
+        self.n_components = config.n_components
+        self.seed = config.seed
+
+    def train(self, X_source, y_source, X_target):
+        self.model = PLSRegression(self.n_components)
+        self.model = self.model.fit(X_source, y_source)
+        return
+
+    def validate(self, domain: str, X, y) -> Tuple[float, float]:
+        preds = self.model.predict(X)
+
+        r2 = r2_score(y, preds)
+        r = np.corrcoef(preds, y)[0, 1]
+        return r2, r
+
+    @classmethod
+    def get_args_model(cls):
+        return PLSRModelArgs
