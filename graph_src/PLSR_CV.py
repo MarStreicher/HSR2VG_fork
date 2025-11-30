@@ -92,8 +92,13 @@ hsr_range={'UCAM_Maize_all': (400,2400),'UNL_Maize': (400,2400),'UNL_Sorghum':(4
                 'LOPEX': (400,2400), 'ANGERS': (400,2400)}   
 #######################################
 # test
+out_dir ="res/PLSR"
+os.makedirs(out_dir, exist_ok=True)
+
+n_folds = 5
+n_seeds = 10
 components_n_ls= np.arange(2,76,1)
-sp = 'LOPEX'
+sp = 'ANGERS'
 hsr_map = map_name_list[1]
-plsr_cv_on_species_ensemble(species=sp,map_name=hsr_map,bands_dict = hsr_range,traits_dict = Traits, n_folds=5, n_seeds=10, comps_ls=components_n_ls)
+plsr_cv_on_species_ensemble(species=sp,map_name=hsr_map,bands_dict = hsr_range,traits_dict = Traits, n_folds=n_folds, n_seeds=n_seeds, comps_ls=components_n_ls)
 ###############################################################################
