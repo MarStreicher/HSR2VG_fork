@@ -92,8 +92,6 @@ hsr_range={'UCAM_Maize_all': (400,2400),'UNL_Maize': (400,2400),'UNL_Sorghum':(4
                 'LOPEX': (400,2400), 'ANGERS': (400,2400)}   
 #######################################
 # test
-n_folds = 5
-n_seeds = 10
 components_n_ls= np.arange(2,76,1)
 sp = 'LOPEX'
 hsr_map = map_name_list[1]
