@@ -15,15 +15,6 @@ module load lang/Anaconda3/2024.02-1
 eval "$(conda shell.zsh hook)"
 conda activate env_hsr_adaptation
 
-# Set up the proxy for internet access on the compute node
-export http_proxy=http://proxy2.uni-potsdam.de:3128
-export https_proxy=http://proxy2.uni-potsdam.de:3128
-export ftp_proxy=http://proxy2.uni-potsdam.de:3128
-
-# Ensure WandB uses the proxy
-export WANDB_HTTP_PROXY=http://proxy2.uni-potsdam.de:3128
-export WANDB_HTTPS_PROXY=http://proxy2.uni-potsdam.de:3128
-export WANDB_MODE=offline 
 
 export WANDB_AGENT_MAX_INITIAL_FAILURES=1000
 WANDB_AGENT_MAX_INITIAL_FAILURES=1000 wandb agent user/hsr/uehmkpvr
