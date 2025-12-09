@@ -1,0 +1,45 @@
+#!/bin/zsh
+
+#SBATCH --partition=all              # Partition name
+#SBATCH --nodes=1                    # Number of nodes
+#SBATCH --ntasks=1                   # Number of tasks
+#SBATCH --cpus-per-task=1            # Number of CPU cores
+#SBATCH --mem=4G                    # Memory allocation
+#SBATCH --time=0-6:00:00            # Max runtime (hh:mm:ss)
+#SBATCH --output=slurm_out/coral_train-%j.out        # Output log file (stdout + stderr)
+#SBATCH --mail-type=END              # Send an email when the job finishes
+
+# Load modules and activate Conda environment
+cd /work/user/hsr_unsupervised_models
+module load lang/Anaconda3/2024.02-1
+eval "$(conda shell.zsh hook)"
+conda activate env_hsr_adaptation
+
+
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=sorghum --label=LMA --use_wandb --use_csv --n_components=16 --lambda_value=3
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=maize --label=LMA --use_wandb --use_csv --n_components=9 --lambda_value=2
+
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=soybean --label=LMA --use_wandb --use_csv --n_components=74 --lambda_value=0.1
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=maize --label=LMA --use_wandb --use_csv --n_components=75 --lambda_value=0.1
+
+python src/train.py --model=CORAL --source_domain=maize --target_domain=soybean --label=LMA --use_wandb --use_csv --n_components=35 --lambda_value=5
+python src/train.py --model=CORAL --source_domain=maize --target_domain=sorghum --label=LMA --use_wandb --use_csv --n_components=37 --lambda_value=5
+
+
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=camelina --label=N --use_wandb --use_csv --n_components=16 --lambda_value=5
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=21 --lambda_value=5
+python src/train.py --model=CORAL --source_domain=soybean --target_domain=maize --label=N --use_wandb --use_csv --n_components=16 --lambda_value=4
+
+python src/train.py --model=CORAL --source_domain=camelina --target_domain=soybean --label=N --use_wandb --use_csv --n_components=47 --lambda_value=2
+python src/train.py --model=CORAL --source_domain=camelina --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=28 --lambda_value=6
+python src/train.py --model=CORAL --source_domain=camelina --target_domain=maize --label=N --use_wandb --use_csv --n_components=56 --lambda_value=5
+
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=soybean --label=N --use_wandb --use_csv --n_components=43 --lambda_value=0.1
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=camelina --label=N --use_wandb --use_csv --n_components=45 --lambda_value=2
+python src/train.py --model=CORAL --source_domain=sorghum --target_domain=maize --label=N --use_wandb --use_csv --n_components=52 --lambda_value=6
+
+python src/train.py --model=CORAL --source_domain=maize --target_domain=soybean --label=N --use_wandb --use_csv --n_components=58 --lambda_value=2
+python src/train.py --model=CORAL --source_domain=maize --target_domain=camelina --label=N --use_wandb --use_csv --n_components=49 --lambda_value=0.1
+python src/train.py --model=CORAL --source_domain=maize --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=64 --lambda_value=5
+
+

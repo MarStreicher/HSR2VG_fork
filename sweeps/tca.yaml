@@ -1,0 +1,27 @@
+program: src/train.py
+method: bayes
+name: N_tca-soybean-maize
+entity: user
+project: hsr
+run_cap: 300
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
+  - --use_wandb
+  - --model=TCA
+  - --label=N
+  - --source_domain=soybean
+  - --target_domain=maize
+  - --sweep
+metric:
+  name: source_r
+  goal: maximize
+parameters:
+  n_components:
+    values: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+  mu:
+    values: [0.0001, 0.001, 0.1, 1.0, 2.0]
+  kernel:
+    values: ["rbf", "linear"]

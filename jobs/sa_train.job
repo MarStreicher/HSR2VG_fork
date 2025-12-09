@@ -1,0 +1,48 @@
+#!/bin/zsh
+
+#SBATCH --partition=all              # Partition name
+#SBATCH --nodes=1                    # Number of nodes
+#SBATCH --ntasks=1                   # Number of tasks
+#SBATCH --cpus-per-task=1            # Number of CPU cores
+#SBATCH --mem=4G                    # Memory allocation
+#SBATCH --time=0-6:00:00            # Max runtime (hh:mm:ss)
+#SBATCH --output=slurm_out/sa_train-%j.out        # Output log file (stdout + stderr)
+#SBATCH --mail-type=END              # Send an email when the job finishes
+
+# Load modules and activate Conda environment
+cd /work/user/hsr_unsupervised_models
+module load lang/Anaconda3/2024.02-1
+eval "$(conda shell.zsh hook)"
+conda activate env_hsr_adaptation
+
+
+python src/train.py --model=SA --source_domain=soybean --target_domain=sorghum --label=LMA --use_wandb --use_csv --n_components=4 --sa_n_component=62
+python src/train.py --model=SA --source_domain=soybean --target_domain=maize --label=LMA --use_wandb --use_csv --n_components=3 --sa_n_component=74
+
+python src/train.py --model=SA --source_domain=sorghum --target_domain=soybean --label=LMA --use_wandb --use_csv --n_components=71 --sa_n_component=75
+python src/train.py --model=SA --source_domain=sorghum --target_domain=maize --label=LMA --use_wandb --use_csv --n_components=53 --sa_n_component=75
+
+python src/train.py --model=SA --source_domain=maize --target_domain=soybean --label=LMA --use_wandb --use_csv --n_components=20 --sa_n_component=69
+python src/train.py --model=SA --source_domain=maize --target_domain=sorghum --label=LMA --use_wandb --use_csv --n_components=43 --sa_n_component=75
+
+
+
+
+python src/train.py --model=SA --source_domain=soybean --target_domain=camelina --label=N --use_wandb --use_csv --n_components=19 --sa_n_component=72
+python src/train.py --model=SA --source_domain=soybean --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=39 --sa_n_component=55
+python src/train.py --model=SA --source_domain=soybean --target_domain=maize --label=N --use_wandb --use_csv --n_components=37 --sa_n_component=49
+
+python src/train.py --model=SA --source_domain=camelina --target_domain=soybean --label=N --use_wandb --use_csv --n_components=17 --sa_n_component=75
+python src/train.py --model=SA --source_domain=camelina --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=12 --sa_n_component=25
+python src/train.py --model=SA --source_domain=camelina --target_domain=maize --label=N --use_wandb --use_csv --n_components=40 --sa_n_component=53
+
+python src/train.py --model=SA --source_domain=sorghum --target_domain=soybean --label=N --use_wandb --use_csv --n_components=57 --sa_n_component=75
+python src/train.py --model=SA --source_domain=sorghum --target_domain=camelina --label=N --use_wandb --use_csv --n_components=59 --sa_n_component=75
+python src/train.py --model=SA --source_domain=sorghum --target_domain=maize --label=N --use_wandb --use_csv --n_components=63 --sa_n_component=74
+
+python src/train.py --model=SA --source_domain=maize --target_domain=soybean --label=N --use_wandb --use_csv --n_components=63 --sa_n_component=70
+python src/train.py --model=SA --source_domain=maize --target_domain=camelina --label=N --use_wandb --use_csv --n_components=54 --sa_n_component=71
+python src/train.py --model=SA --source_domain=maize --target_domain=sorghum --label=N --use_wandb --use_csv --n_components=56 --sa_n_component=63
+
+
+
